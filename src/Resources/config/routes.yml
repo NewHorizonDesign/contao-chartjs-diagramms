@@ -1,0 +1,4 @@
+# config/routes.yml
+newhorizondesign_contao_chartjs_diagramms.controller:
+    resource: ../../../src/Controller
+    type: annotation
