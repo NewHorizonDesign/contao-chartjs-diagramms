@@ -38,6 +38,7 @@ $GLOBALS['TL_LANG']['tl_nhd_chartjs']['cssID'] = ["CSS ID", "Hier können Sie ei
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['cssClass'] = ["CSS Klasse", "Hier können Sie beliebig viele Klassen eingeben."];
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['singleSRC'] = ["JSON Datei", "Entweder laden Sie eine JSON Datei hoch, oder schreiben diese in das Textfeld"];
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['activeAnimation'] = ["Animationen deaktivieren?", "Falls zuviele Diagramme auf einer Seite existieren, sollte diese Option aktiviert werden!"];
+$GLOBALS['TL_LANG']['tl_nhd_chartjs']['responsiveWidth'] = ["Responsive Breite aktivieren?", "Soll der Chart auf die maximal mögliche Breite erstellt werden?"];
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['jsonInput'] = ["Dataset ChartJS", "Definiere hier den Dataset für den Chart. Mehr Informationen unter https://www.chartjs.org/docs/latest/charts/"];
 
 

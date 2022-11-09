@@ -160,6 +160,13 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
                 'default' => false,
             ],
         ],
+        'responsiveWidth' => [
+            'inputType' => 'checkbox',
+            'sql' => [
+                'type' => 'boolean',
+                'default' => false,
+            ],
+        ],
         'jsonInput'  => array(
             'inputType' => 'textarea',
             'exclude'   => true,
