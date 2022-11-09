@@ -87,7 +87,6 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
         $canvasWidth = $size[0];
         $canvasHeight = $size[1];
 
-        // $chartModel = NhdChartjsModel::findByID($template->configSelect);
         // dd($chartModel);
 
         return new Response($this->twig->render(
@@ -97,6 +96,9 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
                 'cssClass'  => $chartModel->cssClass,
                 'width'     => $canvasWidth,
                 'height'    => $canvasHeight,
+                'chartType' => $chartModel->chartType,
+                'dataset'   => StringUtil::decodeEntities($chartModel->jsonInput),
+                'chartID'   => $chartModel->id
             ]
         ));
     }

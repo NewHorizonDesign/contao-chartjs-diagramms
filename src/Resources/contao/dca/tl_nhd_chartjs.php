@@ -79,7 +79,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
     // Palettes
     'palettes'    => array(
         '__selector__' => array('addSubpalette'),
-        'default'      => '{first_legend},title,chartType,size,cssID,cssClass;{second_legend},activeAnimation,singleSRC,jsonInput'
+        'default'      => '{first_legend},title,chartType,size,cssID,cssClass;{second_legend},activeAnimation,singleSRC,jsonInput,jsonInputLabels'
     ),
     // Subpalettes
     'subpalettes' => array(
@@ -166,10 +166,22 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'eval'      => array('mandatory' => false, 'tl_class' => 'long clr'),
+            'eval'      => array('mandatory' => false, 'tl_class' => 'w50'),
             'sql'       => "text NOT NULL default ''",
             'load_callback' => array(
                 array('tl_nhd_chartjs', 'jsonInputCallback')
+            )
+        ),
+        'jsonInputLabels'  => array(
+            'inputType' => 'textarea',
+            'exclude'   => true,
+            'search'    => true,
+            'filter'    => true,
+            'sorting'   => true,
+            'eval'      => array('mandatory' => false, 'tl_class' => 'w50'),
+            'sql'       => "text NOT NULL default ''",
+            'load_callback' => array(
+                array('tl_nhd_chartjs', 'jsonInputLabelsCallback')
             )
         ),
     )
@@ -177,22 +189,27 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
 
 class tl_nhd_chartjs extends Backend
 {
+    public function jsonInputLabelsCallback($varValue, DataContainer $dc)
+    {
+        return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInputLabels']['default']);
+    }
+
     public function jsonInputCallback($varValue, DataContainer $dc)
     {
         switch($dc->activeRecord->chartType) {
-            case 'barchart':
+            case 'bar':
                 return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['barchart']);
                 break;
-            case 'bubblechart':
+            case 'bubble':
                 // return "bubblechart";
                 break;
-            case 'linechart':
+            case 'line':
                 // return "linechart";
                 break;
-            case 'scatterchart':
+            case 'scatter':
                 // return "scatterchart";
                 break;
-            case 'piechart':
+            case 'pie':
                 // return "piechart";
                 break;
             case 'doughnut':

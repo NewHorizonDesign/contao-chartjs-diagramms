@@ -1,4 +1,4 @@
-![Alt text](docs/logo.png?raw=true "logo")
+![Alt text](docs/logo.jpg?raw=true "logo")
 
 
 # Welcome to Contao ChartJS Diagramms

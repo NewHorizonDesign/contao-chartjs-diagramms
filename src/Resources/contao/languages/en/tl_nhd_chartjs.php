@@ -45,11 +45,11 @@ $GLOBALS['TL_LANG']['tl_nhd_chartjs']['jsonInput'] = ["Dataset ChartJS", "Defini
  * Options
  */
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['chartTypes']['options'] = [
-    'barchart' => 'Bar Diagramm',
-    'bubblechart' => 'Blasen Diagramm',
-    'linechart' => 'Linien Diagramm',
-    'scatterchart' => 'Streu Diagramm',
-    'piechart' => 'Pie Diagramm',
+    'bar' => 'Bar Diagramm',
+    'bubble' => 'Blasen Diagramm',
+    'line' => 'Linien Diagramm',
+    'scatter' => 'Streu Diagramm',
+    'pie' => 'Pie Diagramm',
     'doughnut' => 'Donut Diagramm'
 ];
 
@@ -61,7 +61,9 @@ $GLOBALS['TL_LANG']['tl_nhd_chartjs']['customButton'] = "Custom Routine starten"
 /**
  * Defaults
  */
+$GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInputLabels']['default'] = json_encode("[0,1,2,3,4,5,6]");
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['barchart'] = json_encode("{
+    labels: labels,
     data: [65, 59, 80, 81, 56, 55, 40],
     backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
