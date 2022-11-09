@@ -87,18 +87,20 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
         $canvasWidth = $size[0];
         $canvasHeight = $size[1];
 
-        // dd($chartModel);
-
         return new Response($this->twig->render(
-            '@NewhorizondesignContaoChartjsDiagramms/diagramms/bar.twig',
+            '@NewhorizondesignContaoChartjsDiagramms/diagramms/dynamicChart.twig',
             [
-                'cssID'     => $chartModel->cssID,
-                'cssClass'  => $chartModel->cssClass,
-                'width'     => $canvasWidth,
-                'height'    => $canvasHeight,
-                'chartType' => $chartModel->chartType,
-                'dataset'   => StringUtil::decodeEntities($chartModel->jsonInput),
-                'chartID'   => $chartModel->id
+                'cssID'             => $chartModel->cssID,
+                'cssClass'          => $chartModel->cssClass,
+                'chartWith'         => $canvasWidth,
+                'chartHeight'       => $canvasHeight,
+                'chartType'         => $chartModel->chartType,
+                'chartData'         => StringUtil::decodeEntities($chartModel->jsonInput),
+                'chartLabel'        => StringUtil::decodeEntities($chartModel->jsonInputLabels),
+                'chartOptions'      => StringUtil::decodeEntities($chartModel->jsonInputOptions),
+                'chartID'           => $chartModel->id,
+                'activeAnimation'   => ($chartModel->activeAnimation) ? 'true': 'false',
+                'responsiveWidth'   => ($chartModel->responsiveWidth) ? 'true': 'false'
             ]
         ));
     }

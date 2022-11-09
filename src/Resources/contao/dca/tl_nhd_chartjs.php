@@ -79,7 +79,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
     // Palettes
     'palettes'    => array(
         '__selector__' => array('addSubpalette'),
-        'default'      => '{first_legend},title,chartType,size,cssID,cssClass;{second_legend},activeAnimation,singleSRC,jsonInput,jsonInputLabels'
+        'default'      => '{first_legend},title,chartType,size,cssID,cssClass;{second_legend},activeAnimation,singleSRC,jsonInput,jsonInputLabels,jsonInputOptions;'
     ),
     // Subpalettes
     'subpalettes' => array(
@@ -184,40 +184,70 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
                 array('tl_nhd_chartjs', 'jsonInputLabelsCallback')
             )
         ),
+        'jsonInputOptions'  => array(
+            'inputType' => 'textarea',
+            'exclude'   => true,
+            'search'    => true,
+            'filter'    => true,
+            'sorting'   => true,
+            'eval'      => array('mandatory' => false, 'tl_class' => 'w50'),
+            'sql'       => "text NOT NULL default ''",
+            'load_callback' => array(
+                array('tl_nhd_chartjs', 'jsonInputOptionsCallback')
+            )
+        ),
     )
 );
 
 class tl_nhd_chartjs extends Backend
 {
+
+    public function jsonInputOptionsCallback($varValue, DataContainer $dc)
+    {
+        if(!empty($varValue)) {
+            return $varValue;
+        } else {
+            return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInputOptions']['default']);
+        }
+    }
+
     public function jsonInputLabelsCallback($varValue, DataContainer $dc)
     {
-        return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInputLabels']['default']);
+        if(!empty($varValue)) {
+            return $varValue;
+        } else {
+            return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInputLabels']['default']);
+        }
     }
 
     public function jsonInputCallback($varValue, DataContainer $dc)
     {
-        switch($dc->activeRecord->chartType) {
-            case 'bar':
-                return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['barchart']);
-                break;
-            case 'bubble':
-                // return "bubblechart";
-                break;
-            case 'line':
-                // return "linechart";
-                break;
-            case 'scatter':
-                // return "scatterchart";
-                break;
-            case 'pie':
-                // return "piechart";
-                break;
-            case 'doughnut':
-                // return "doughnut";
-                break;
-            default:
-                return " ";
-                break;
+        if(!empty($varValue)) {
+            return $varValue;
+        } else {
+            switch($dc->activeRecord->chartType) {
+                case 'bar':
+                    return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['var']);
+                    break;
+                case 'bubble':
+                    return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['bubble']);
+                    break;
+                case 'line':
+                    return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['line']);
+                    break;
+                case 'scatter':
+                    return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['scatter']);
+                    break;
+                case 'pie':
+                    return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['pie']);
+                    break;
+                case 'doughnut':
+                    return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['doughnut']);
+                    break;
+                default:
+                    return " ";
+                    break;
+            }
         }
     }
 }

@@ -1,0 +1,24 @@
+<section class="diagramms{% if cssClass is defined %} {{cssClass}}{% endif %}">
+    <canvas {% if cssID is defined %}id="{{cssID}}"{% endif %} {% if chartWidth is defined %}width="{{chartWidth}}"{% endif %} {% if chartHeight is defined %}height="{{chartHeight}}"{% endif %}>
+</section>
+
+<script>
+    const ctx_{{chartID}} = document.getElementById('{{cssID}}');
+    ctx_{{chartID}}.width = {{chartWidth}};
+    ctx_{{chartID}}.height = {{chartHeight}};
+
+    const labels_{{chartID}} = {{chartLabel|raw}};
+    const data_{{chartID}} = {
+        labels: labels_{{chartID}},
+        datasets: [{{chartData|raw}}]
+    }
+    const chart_{{chartID}} = new Chart(ctx_{{chartID}}, {
+        type: '{{chartType}}',
+        data: data_{{chartID}},
+        options: {
+            {{chartOptions|raw}},
+            responsive: {{responsiveWidth}},
+            maintainAspectRatio: false
+        },
+    });
+</script>

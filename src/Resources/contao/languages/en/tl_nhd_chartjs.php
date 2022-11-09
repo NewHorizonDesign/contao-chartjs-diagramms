@@ -61,10 +61,34 @@ $GLOBALS['TL_LANG']['tl_nhd_chartjs']['customButton'] = "Custom Routine starten"
 /**
  * Defaults
  */
-$GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInputLabels']['default'] = json_encode("[0,1,2,3,4,5,6]");
+$GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInputLabels']['default'] = json_encode("[
+    '0','1','2','3','4','5'
+]");
+$GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInputOptions']['default'] = json_encode("
+plugins: {
+	legend: {
+		display: false,
+		position: 'bottom',
+		align: 'start',
+		labels: {
+			font: {
+				size: 9
+			}
+		}
+	},
+	tooltip: {
+		callbacks: {
+			label: function(tooltipItem, data) {
+				return tooltipItem.label + '\n' + tooltipItem.formattedValue + ' %'
+			}
+		},
+		width: '100%'
+	}
+},
+");
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['barchart'] = json_encode("{
     labels: labels,
-    data: [65, 59, 80, 81, 56, 55, 40],
+    data: [65, 59, 80, 81, 56, 55],
     backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(255, 159, 64, 0.2)',
