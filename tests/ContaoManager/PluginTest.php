@@ -11,17 +11,16 @@
  */
 declare(strict_types=1);
 
-namespace Newhorizondesign\ContaoChartjsDiagrammsBundle\Tests\ContaoManager;
+namespace Newhorizondesign\ContaoChartjsDiagramms\Tests\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\DelegatingParser;
 use Contao\TestCase\ContaoTestCase;
-use Newhorizondesign\ContaoChartjsDiagrammsBundle\ContaoManager\Plugin;
-use Newhorizondesign\ContaoChartjsDiagrammsBundle\ContaoChartjsDiagrammsBundle;
-
+use Newhorizondesign\ContaoChartjsDiagramms\ContaoManager\Plugin;
+use Newhorizondesign\ContaoChartjsDiagramms\NewhorizondesignContaoChartjsDiagramms;
 /**
- * @package Newhorizondesign\ContaoChartjsDiagrammsBundle\Tests\ContaoManager
+ * @package Newhorizondesign\ContaoChartjsDiagramms\Tests\ContaoManager
  */
 class PluginTest extends ContaoTestCase
 {
