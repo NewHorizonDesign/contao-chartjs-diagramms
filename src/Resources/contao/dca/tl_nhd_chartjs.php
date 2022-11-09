@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /*
  * This file is part of Contao ChartJS Diagramms.
- * 
+ *
  * (c) NewHorizonDesign 2022 <service@newhorizon-design.de>
  * @license GPL-3.0-or-later
  * For the full copyright and license information,
@@ -13,6 +13,7 @@ declare(strict_types=1);
  */
 
 use Contao\Backend;
+use Contao\DataContainer;
 use Contao\DC_Table;
 use Contao\Input;
 
@@ -30,11 +31,6 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
                 'id' => 'primary'
             )
         ),
-    ),
-    'edit'        => array(
-        'buttons_callback' => array(
-            array('tl_nhd_chartjs', 'buttonsCallback')
-        )
     ),
     'list'        => array(
         'sorting'           => array(
@@ -83,11 +79,11 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
     // Palettes
     'palettes'    => array(
         '__selector__' => array('addSubpalette'),
-        'default'      => '{first_legend},title,selectField,checkboxField,multitextField;{second_legend},addSubpalette'
+        'default'      => '{first_legend},title,chartType,size,cssID,cssClass;{second_legend},activeAnimation,singleSRC,jsonInput'
     ),
     // Subpalettes
     'subpalettes' => array(
-        'addSubpalette' => 'textareaField',
+        'addSubpalette' => '',
     ),
     // Fields
     'fields'      => array(
@@ -104,78 +100,107 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'filter'    => true,
             'sorting'   => true,
             'flag'      => 1,
-            'eval'      => array('mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'),
+            'eval'      => array('mandatory' => true, 'maxlength' => 255, 'tl_class' => 'long clr'),
             'sql'       => "varchar(255) NOT NULL default ''"
         ),
-        'selectField'    => array(
+        'chartType'    => array(
             'inputType' => 'select',
             'exclude'   => true,
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'reference' => $GLOBALS['TL_LANG']['tl_nhd_chartjs'],
-            'options'   => array('firstoption', 'secondoption'),
+            'options'   => &$GLOBALS['TL_LANG']['tl_nhd_chartjs']['chartTypes']['options'],
             //'foreignKey'            => 'tl_user.name',
             //'options_callback'      => array('CLASS', 'METHOD'),
-            'eval'      => array('includeBlankOption' => true, 'tl_class' => 'w50'),
+            'eval'      => array('submitOnChange' => true, 'includeBlankOption' => true, 'tl_class' => 'w50'),
             'sql'       => "varchar(255) NOT NULL default ''",
-            //'relation'  => array('type' => 'hasOne', 'load' => 'lazy')
+            //'relation'  => array('type' => 'hasOne', 'load' => 'lazy'),
         ),
-        'checkboxField'  => array(
-            'inputType' => 'select',
-            'exclude'   => true,
-            'search'    => true,
-            'filter'    => true,
-            'sorting'   => true,
-            'reference' => $GLOBALS['TL_LANG']['tl_nhd_chartjs'],
-            'options'   => array('firstoption', 'secondoption'),
-            //'foreignKey'            => 'tl_user.name',
-            //'options_callback'      => array('CLASS', 'METHOD'),
-            'eval'      => array('includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50'),
-            'sql'       => "varchar(255) NOT NULL default ''",
-            //'relation'  => array('type' => 'hasOne', 'load' => 'lazy')
-        ),
-        'multitextField' => array(
+        'size' => array(
             'inputType' => 'text',
             'exclude'   => true,
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'eval'      => array('multiple' => true, 'size' => 4, 'decodeEntities' => true, 'tl_class' => 'w50'),
+            'eval'      => array('multiple' => true, 'size' => 2, 'decodeEntities' => true, 'tl_class' => 'w50'),
             'sql'       => "varchar(255) NOT NULL default ''"
         ),
-        'addSubpalette'  => array(
+        'cssID'  => array(
+            'inputType' => 'text',
             'exclude'   => true,
-            'inputType' => 'checkbox',
-            'eval'      => array('submitOnChange' => true, 'tl_class' => 'w50 clr'),
-            'sql'       => "char(1) NOT NULL default ''"
+            'search'    => true,
+            'filter'    => true,
+            'sorting'   => true,
+            'eval'      => array('mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'),
+            'sql'       => "varchar(255) NOT NULL default ''"
         ),
-        'textareaField'  => array(
+        'cssClass'  => array(
+            'inputType' => 'text',
+            'exclude'   => true,
+            'search'    => true,
+            'filter'    => true,
+            'sorting'   => true,
+            'eval'      => array('mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'),
+            'sql'       => "varchar(255) NOT NULL default ''"
+        ),
+        'singleSRC' => [
+            'exclude'   => true,
+            'inputType' => 'fileTree',
+            'eval'      => [
+                'filesOnly'  => true,
+                'fieldType'  => 'radio',
+                'extensions' => 'json',
+            ],
+            'sql'       => "binary(16) NULL"
+        ],
+        'activeAnimation' => [
+            'inputType' => 'checkbox',
+            'sql' => [
+                'type' => 'boolean',
+                'default' => false,
+            ],
+        ],
+        'jsonInput'  => array(
             'inputType' => 'textarea',
             'exclude'   => true,
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'eval'      => array('rte' => 'tinyMCE', 'tl_class' => 'clr'),
-            'sql'       => 'text NULL'
-        )
+            'eval'      => array('mandatory' => false, 'tl_class' => 'long clr'),
+            'sql'       => "text NOT NULL default ''",
+            'load_callback' => array(
+                array('tl_nhd_chartjs', 'jsonInputCallback')
+            )
+        ),
     )
 );
 
 class tl_nhd_chartjs extends Backend
 {
-    /**
-     * @param $arrButtons
-     * @param  DC_Table $dc
-     * @return mixed
-     */
-    public function buttonsCallback($arrButtons, DC_Table $dc)
+    public function jsonInputCallback($varValue, DataContainer $dc)
     {
-        if (Input::get('act') === 'edit')
-        {
-            $arrButtons['customButton'] = '<button type="submit" name="customButton" id="customButton" class="tl_submit customButton" accesskey="x">' . $GLOBALS['TL_LANG']['tl_nhd_chartjs']['customButton'] . '</button>';
+        switch($dc->activeRecord->chartType) {
+            case 'barchart':
+                return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['barchart']);
+                break;
+            case 'bubblechart':
+                // return "bubblechart";
+                break;
+            case 'linechart':
+                // return "linechart";
+                break;
+            case 'scatterchart':
+                // return "scatterchart";
+                break;
+            case 'piechart':
+                // return "piechart";
+                break;
+            case 'doughnut':
+                // return "doughnut";
+                break;
+            default:
+                return " ";
+                break;
         }
-
-        return $arrButtons;
     }
 }

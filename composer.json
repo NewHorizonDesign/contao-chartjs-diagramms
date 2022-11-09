@@ -4,8 +4,9 @@
     "keywords": [
         "contao",
         "bundle",
-        "tag 3",
-        "tag 4"
+        "chartjs",
+        "newhorizondesign",
+        "bundle"
     ],
     "type": "contao-bundle",
     "license": "GPL-3.0-or-later",
@@ -23,7 +24,8 @@
     },
     "require": {
         "php": "^8.0",
-        "contao/core-bundle": "^4.13 || ^5.0"
+        "contao/core-bundle": "^4.13 || ^5.0",
+        "charts/chart.js": "^3.9.1"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.3.1",
@@ -38,6 +40,12 @@
             "Newhorizondesign\\ContaoChartjsDiagramms\\": "src/"
         }
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/chartjs/Chart.js.git"
+        }
+    ],
     "extra": {
         "contao-manager-plugin": "Newhorizondesign\\ContaoChartjsDiagramms\\ContaoManager\\Plugin"
     }

@@ -1,0 +1,9 @@
+<section
+   class="diagramms{% if cssClass is defined %} {{cssClass}}{% endif %}"
+>
+    <canvas
+        {% if cssID is defined %}id="{{cssID}}"{% endif %}
+        {% if width is defined %}width="{{width}}"{% endif %}
+        {% if height is defined %}height="{{height}}"{% endif %}
+    >
+</section>

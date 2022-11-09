@@ -2,7 +2,7 @@
 
 /*
  * This file is part of Contao ChartJS Diagramms.
- * 
+ *
  * (c) NewHorizonDesign 2022 <service@newhorizon-design.de>
  * @license GPL-3.0-or-later
  * For the full copyright and license information,
@@ -11,17 +11,17 @@
  */
 declare(strict_types=1);
 
-namespace Newhorizondesign\ContaoChartjsDiagramms\Tests\ContaoManager;
+namespace Newhorizondesign\ContaoChartjsDiagrammsBundle\Tests\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\DelegatingParser;
 use Contao\TestCase\ContaoTestCase;
-use Newhorizondesign\ContaoChartjsDiagramms\ContaoManager\Plugin;
-use Newhorizondesign\ContaoChartjsDiagramms\NewhorizondesignContaoChartjsDiagramms;
+use Newhorizondesign\ContaoChartjsDiagrammsBundle\ContaoManager\Plugin;
+use Newhorizondesign\ContaoChartjsDiagrammsBundle\ContaoChartjsDiagrammsBundle;
 
 /**
- * @package Newhorizondesign\ContaoChartjsDiagramms\Tests\ContaoManager
+ * @package Newhorizondesign\ContaoChartjsDiagrammsBundle\Tests\ContaoManager
  */
 class PluginTest extends ContaoTestCase
 {

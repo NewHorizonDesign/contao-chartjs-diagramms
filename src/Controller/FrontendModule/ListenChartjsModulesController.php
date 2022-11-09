@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /*
  * This file is part of Contao ChartJS Diagramms.
- * 
+ *
  * (c) NewHorizonDesign 2022 <service@newhorizon-design.de>
  * @license GPL-3.0-or-later
  * For the full copyright and license information,
@@ -22,22 +22,32 @@ use Contao\Date;
 use Contao\FrontendUser;
 use Contao\ModuleModel;
 use Contao\PageModel;
+use Contao\StringUtil;
 use Contao\Template;
 use Doctrine\DBAL\Connection;
+use Newhorizondesign\ContaoChartjsDiagramms\Model\NhdChartjsModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment as TwigEnvironment;
 
-#[AsFrontendModule(category: 'chartjs_modul')]
+
+
+#[AsFrontendModule(category: 'ChartJS')]
 class ListenChartjsModulesController extends AbstractFrontendModuleController
 {
     public const TYPE = 'listen_chartjs_modules';
 
-    protected ?PageModel $page;
+    private TwigEnvironment $twig;
 
-    /**
+    public function __construct(TwigEnvironment $twig)
+    {
+        $this->twig = $twig;
+    }
+
+   /**
      * This method extends the parent __invoke method,
      * its usage is usually not necessary
      */
@@ -46,10 +56,8 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
         // Get the page model
         $this->page = $page;
 
-        $scopeMatcher = $this->container->get('contao.routing.scope_matcher');
-
-        if ($this->page instanceof PageModel && $scopeMatcher->isFrontendRequest($request))
-        {
+        if ($this->page instanceof PageModel && $this->get('contao.routing.scope_matcher')->isFrontendRequest($request)) {
+            // If TL_MODE === 'FE'
             $this->page->loadDetails();
         }
 
@@ -74,51 +82,22 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
-        $userFirstname = 'DUDE';
-        $user = $this->container->get('security.helper')->getUser();
+        $chartModel = NhdChartjsModel::findByID($template->configSelect);
+        $size = StringUtil::deserialize($chartModel->size);
+        $canvasWidth = $size[0];
+        $canvasHeight = $size[1];
 
-        // Get the logged in frontend user... if there is one
-        if ($user instanceof FrontendUser)
-        {
-            $userFirstname = $user->firstname;
-        }
+        // $chartModel = NhdChartjsModel::findByID($template->configSelect);
+        // dd($chartModel);
 
-        /** @var Session $session */
-        $session = $request->getSession();
-        $bag = $session->getBag('contao_frontend');
-        $bag->set('foo', 'bar');
-
-        /** @var Date $dateAdapter */
-        $dateAdapter = $this->container->get('contao.framework')->getAdapter(Date::class);
-
-        $intWeekday = $dateAdapter->parse('w');
-        $translator = $this->container->get('translator');
-        $strWeekday = $translator->trans('DAYS.' . $intWeekday, [], 'contao_default');
-
-        $arrGuests = [];
-
-        // Get the database connection
-        $db = $this->container->get('database_connection');
-
-        /** @var \Doctrine\DBAL\Result $stmt */
-        $stmt = $db->executeQuery('SELECT * FROM tl_member WHERE gender = ? ORDER BY lastname', ['female']);
-
-        while (false !== ($row = $stmt->fetchAssociative()))
-        {
-            $arrGuests[] = $row['firstname'];
-        }
-
-        $template->helloTitle = sprintf(
-            'Hi %s, and welcome to the "Hello World Module". Today is %s.',
-            $userFirstname, $strWeekday
-        );
-
-        $template->helloText = '';
-
-        if (!empty($arrGuests)){
-            $template->helloText = 'Our guests today are: ' . implode(', ', $arrGuests);
-        }
-
-        return $template->getResponse();
+        return new Response($this->twig->render(
+            '@NewhorizondesignContaoChartjsDiagramms/diagramms/bar.twig',
+            [
+                'cssID'     => $chartModel->cssID,
+                'cssClass'  => $chartModel->cssClass,
+                'width'     => $canvasWidth,
+                'height'    => $canvasHeight,
+            ]
+        ));
     }
 }

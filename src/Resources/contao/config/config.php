@@ -2,7 +2,7 @@
 
 /*
  * This file is part of Contao ChartJS Diagramms.
- * 
+ *
  * (c) NewHorizonDesign 2022 <service@newhorizon-design.de>
  * @license GPL-3.0-or-later
  * For the full copyright and license information,
@@ -15,7 +15,7 @@ use Newhorizondesign\ContaoChartjsDiagramms\Model\NhdChartjsModel;
 /**
  * Backend modules
  */
-$GLOBALS['BE_MOD']['chartjs_modul']['chartjs_collection'] = array(
+$GLOBALS['BE_MOD']['chartjs']['chartjs_collection'] = array(
     'tables' => array('tl_nhd_chartjs')
 );
 
