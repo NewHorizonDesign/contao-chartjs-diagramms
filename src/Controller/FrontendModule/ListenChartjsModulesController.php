@@ -92,7 +92,7 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
             [
                 'cssID'             => $chartModel->cssID,
                 'cssClass'          => $chartModel->cssClass,
-                'chartWith'         => $canvasWidth,
+                'chartWidth'        => $canvasWidth,
                 'chartHeight'       => $canvasHeight,
                 'chartType'         => $chartModel->chartType,
                 'chartData'         => StringUtil::decodeEntities($chartModel->jsonInput),
