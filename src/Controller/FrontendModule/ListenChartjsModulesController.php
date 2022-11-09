@@ -90,6 +90,7 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
         return new Response($this->twig->render(
             '@NewhorizondesignContaoChartjsDiagramms/diagramms/dynamicChart.twig',
             [
+                'title'             => $chartModel->title,
                 'cssID'             => $chartModel->cssID,
                 'cssClass'          => $chartModel->cssClass,
                 'chartWidth'        => $canvasWidth,

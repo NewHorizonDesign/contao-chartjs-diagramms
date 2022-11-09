@@ -1,4 +1,7 @@
 <section class="diagramms{% if cssClass is defined %} {{cssClass}}{% endif %}">
+    {% if title is defined %}
+        <h3>{{title}}</h3>
+    {% endif %}
     <canvas {% if cssID is defined %}id="{{cssID}}"{% endif %} {% if chartWidth is defined %}width="{{chartWidth}}"{% endif %} {% if chartHeight is defined %}height="{{chartHeight}}"{% endif %}>
 </section>
 
