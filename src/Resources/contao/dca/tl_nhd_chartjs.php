@@ -79,7 +79,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
     // Palettes
     'palettes'    => array(
         '__selector__' => array('addSubpalette'),
-        'default'      => '{first_legend},title,chartType,size,cssID,cssClass;{second_legend},activeAnimation,singleSRC,jsonInput,jsonInputLabels,jsonInputOptions;'
+        'default'      => '{first_legend},title,chartType,size,cssID,cssClass;{second_legend},activeAnimation,responsiveWidth,singleSRC,jsonInput,jsonInputLabels,jsonInputOptions;'
     ),
     // Subpalettes
     'subpalettes' => array(

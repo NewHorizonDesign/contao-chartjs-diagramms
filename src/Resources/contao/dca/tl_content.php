@@ -14,25 +14,26 @@ declare(strict_types=1);
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\Database;
-use Newhorizondesign\ContaoChartjsDiagramms\Controller\FrontendModule\ListenChartjsModulesController;
+use Newhorizondesign\ContaoChartjsDiagramms\Controller\ContentElement\ModDiagramElementController;
 
 /**
- * Frontend modules
+ * Content elements
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes'][ListenChartjsModulesController::TYPE] = '{title_legend},name,headline,configSelect,type;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_content']['palettes'][ModDiagramElementController::TYPE] = '{type_legend},type,headline;{text_legend_custom},configSelect;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
 
 /**
  * Palette Manipulator
  */
 PaletteManipulator::create()
-    ->addLegend('configSelect', 'title_legend', PaletteManipulator::POSITION_APPEND)
-    ->applyToPalette('default', 'tl_module')
+    ->addLegend('configSelect', 'text_legend_custom', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('default', 'tl_content')
 ;
 
 /**
+ *
  * Add additional Fields
  */
-$GLOBALS['TL_DCA']['tl_module']['fields']['configSelect'] = [
+$GLOBALS['TL_DCA']['tl_content']['fields']['configSelect'] = [
     'exclude'                 => true,
     'filter'                  => true,
     'inputType'               => 'select',

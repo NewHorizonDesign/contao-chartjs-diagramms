@@ -40,7 +40,7 @@ $GLOBALS['TL_LANG']['tl_nhd_chartjs']['singleSRC'] = ["JSON Datei", "Entweder la
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['activeAnimation'] = ["Animationen deaktivieren?", "Falls zuviele Diagramme auf einer Seite existieren, sollte diese Option aktiviert werden!"];
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['responsiveWidth'] = ["Responsive Breite aktivieren?", "Soll der Chart auf die maximal mögliche Breite erstellt werden?"];
 $GLOBALS['TL_LANG']['tl_nhd_chartjs']['jsonInput'] = ["Dataset ChartJS", "Definiere hier den Dataset für den Chart. Mehr Informationen unter https://www.chartjs.org/docs/latest/charts/"];
-
+$GLOBALS['TL_LANG']['tl_nhd_chartjs']['configSelect'] = ["Diagrammauswahl","Wähle hier dein Diagramm aus, welches du anzeigen lassen willst."];
 
 /**
  * Options

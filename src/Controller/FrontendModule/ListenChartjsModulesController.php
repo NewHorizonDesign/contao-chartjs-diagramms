@@ -82,26 +82,28 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
-        $chartModel = NhdChartjsModel::findByID($template->configSelect);
-        $size = StringUtil::deserialize($chartModel->size);
+        $chartNumber = $template->configSelect;
+        ${'chartModel'.$chartNumber} = NhdChartjsModel::findByID($chartNumber);
+
+        $size = StringUtil::deserialize(${'chartModel'.$chartNumber}->size);
         $canvasWidth = $size[0];
         $canvasHeight = $size[1];
 
         return new Response($this->twig->render(
             '@NewhorizondesignContaoChartjsDiagramms/diagramms/dynamicChart.twig',
             [
-                'title'             => $chartModel->title,
-                'cssID'             => $chartModel->cssID,
-                'cssClass'          => $chartModel->cssClass,
+                'chartID'           => $chartNumber,
+                'title'             => ${'chartModel'.$chartNumber}->title,
+                'cssID'             => ${'chartModel'.$chartNumber}->cssID,
+                'cssClass'          => ${'chartModel'.$chartNumber}->cssClass,
                 'chartWidth'        => $canvasWidth,
                 'chartHeight'       => $canvasHeight,
-                'chartType'         => $chartModel->chartType,
-                'chartData'         => StringUtil::decodeEntities($chartModel->jsonInput),
-                'chartLabel'        => StringUtil::decodeEntities($chartModel->jsonInputLabels),
-                'chartOptions'      => StringUtil::decodeEntities($chartModel->jsonInputOptions),
-                'chartID'           => $chartModel->id,
-                'activeAnimation'   => ($chartModel->activeAnimation) ? 'true': 'false',
-                'responsiveWidth'   => ($chartModel->responsiveWidth) ? 'true': 'false'
+                'chartType'         => ${'chartModel'.$chartNumber}->chartType,
+                'chartData'         => StringUtil::decodeEntities(${'chartModel'.$chartNumber}->jsonInput),
+                'chartLabel'        => StringUtil::decodeEntities(${'chartModel'.$chartNumber}->jsonInputLabels),
+                'chartOptions'      => StringUtil::decodeEntities(${'chartModel'.$chartNumber}->jsonInputOptions),
+                'chartAnimation'    => (${'chartModel'.$chartNumber}->activeAnimation) ? true: false,
+                'responsiveWidth'   => (${'chartModel'.$chartNumber}->responsiveWidth) ? true: false,
             ]
         ));
     }
