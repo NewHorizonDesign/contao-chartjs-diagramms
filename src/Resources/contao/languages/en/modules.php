@@ -23,4 +23,8 @@ $GLOBALS['TL_LANG']['MOD']['chartjs_collection'] = ['Diagramme', 'Fügt ein beli
  * Frontend modules
  */
 $GLOBALS['TL_LANG']['FMD'][ListenChartjsModulesController::TYPE] = ['ChartJS Diagramme', 'Fügt ein beliebiges Chart Diagramm ein.'];
-$GLOBALS['TL_DCA']['tl_module']['fields']['configSelect'] = ["Diagrammauswahl","Wähle hier dein Diagramm aus, welches du anzeigen lassen willst."];
+
+/**
+ * Content Module
+ */
+$GLOBALS['TL_LANG']['tl_module']['fields']['configSelect'] = ["Diagrammauswahl","Wähle hier dein Diagramm aus, welches du anzeigen lassen willst."];

@@ -25,5 +25,5 @@ declare(strict_types=1);
 /**
  * Content
  */
-$GLOBALS['TL_DCA']['tl_content']['fields']['text_legend_custom'] = ["Diagrammauswahl","Wähle hier dein Diagramm aus, welches du anzeigen lassen willst."];
-$GLOBALS['TL_DCA']['tl_content']['fields']['configSelect'] = ["Diagrammauswahl","Wähle hier dein Diagramm aus, welches du anzeigen lassen willst."];
+$GLOBALS['TL_LANG']['tl_content']['fields']['text_legend_custom'] = ["Diagrammauswahl","Wähle hier dein Diagramm aus, welches du anzeigen lassen willst."];
+$GLOBALS['TL_LANG']['tl_content']['fields']['configSelect'] = ["Diagrammauswahl","Wähle hier dein Diagramm aus, welches du anzeigen lassen willst."];

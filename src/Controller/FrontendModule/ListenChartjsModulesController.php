@@ -47,23 +47,6 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
         $this->twig = $twig;
     }
 
-   /**
-     * This method extends the parent __invoke method,
-     * its usage is usually not necessary
-     */
-    public function __invoke(Request $request, ModuleModel $model, string $section, array $classes = null, PageModel $page = null): Response
-    {
-        // Get the page model
-        $this->page = $page;
-
-        if ($this->page instanceof PageModel && $this->get('contao.routing.scope_matcher')->isFrontendRequest($request)) {
-            // If TL_MODE === 'FE'
-            $this->page->loadDetails();
-        }
-
-        return parent::__invoke($request, $model, $section, $classes);
-    }
-
     /**
      * Lazyload services
      */
@@ -82,8 +65,9 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
-        $chartNumber = $template->configSelect;
-        ${'chartModel'.$chartNumber} = NhdChartjsModel::findByID($chartNumber);
+        $chartID = $template->configSelect;
+        $chartNumber = $template->configSelect.$template->tstamp;
+        ${'chartModel'.$chartNumber} = NhdChartjsModel::findByID($chartID );
 
         $size = StringUtil::deserialize(${'chartModel'.$chartNumber}->size);
         $canvasWidth = $size[0];
@@ -94,7 +78,7 @@ class ListenChartjsModulesController extends AbstractFrontendModuleController
             [
                 'chartID'           => $chartNumber,
                 'title'             => ${'chartModel'.$chartNumber}->title,
-                'cssID'             => ${'chartModel'.$chartNumber}->cssID,
+                'cssID'             => ${'chartModel'.$chartNumber}->cssID."-".$chartNumber,
                 'cssClass'          => ${'chartModel'.$chartNumber}->cssClass,
                 'chartWidth'        => $canvasWidth,
                 'chartHeight'       => $canvasHeight,

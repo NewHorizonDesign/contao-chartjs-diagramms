@@ -19,7 +19,7 @@ use Newhorizondesign\ContaoChartjsDiagramms\Controller\FrontendModule\ListenChar
 /**
  * Frontend modules
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes'][ListenChartjsModulesController::TYPE] = '{title_legend},name,headline,configSelect,type;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes'][ListenChartjsModulesController::TYPE] = '{title_legend},name,headline,type,configSelect;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
 
 /**
  * Palette Manipulator
@@ -33,11 +33,12 @@ PaletteManipulator::create()
  * Add additional Fields
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['configSelect'] = [
+    'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fields']['configSelect'],
     'exclude'                 => true,
     'filter'                  => true,
     'inputType'               => 'select',
     'foreignKey'              => 'tl_nhd_chartjs.title',
-    'eval'                    => array('mandatory'=>true, 'submitOnChange'=>true, 'includeBlankOption'=>true, 'tl_class'=>'long clr'),
+    'eval'                    => array('mandatory'=>true, 'submitOnChange'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
     'sql'                     => "int(10) unsigned NOT NULL default '0'",
     'relation'                => array('type'=>'hasOne', 'load'=>'lazy'),
     'options_callback'        => function() {

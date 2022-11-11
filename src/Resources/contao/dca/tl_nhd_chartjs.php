@@ -110,11 +110,8 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'filter'    => true,
             'sorting'   => true,
             'options'   => &$GLOBALS['TL_LANG']['tl_nhd_chartjs']['chartTypes']['options'],
-            //'foreignKey'            => 'tl_user.name',
-            //'options_callback'      => array('CLASS', 'METHOD'),
-            'eval'      => array('submitOnChange' => true, 'includeBlankOption' => true, 'tl_class' => 'w50'),
+            'eval'      => array('submitOnChange' => true, 'includeBlankOption' => false, 'tl_class' => 'w50'),
             'sql'       => "varchar(255) NOT NULL default ''",
-            //'relation'  => array('type' => 'hasOne', 'load' => 'lazy'),
         ),
         'size' => array(
             'inputType' => 'text',
@@ -143,22 +140,23 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'eval'      => array('mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'),
             'sql'       => "varchar(255) NOT NULL default ''"
         ),
-        'singleSRC' => [
-            'exclude'   => true,
-            'inputType' => 'fileTree',
-            'eval'      => [
-                'filesOnly'  => true,
-                'fieldType'  => 'radio',
-                'extensions' => 'json',
-            ],
-            'sql'       => "binary(16) NULL"
-        ],
-        'activeAnimation' => [
-            'inputType' => 'checkbox',
+        // 'singleSRC' => [
+        //     'exclude'   => true,
+        //     'inputType' => 'fileTree',
+        //     'eval'      => [
+        //         'filesOnly'  => true,
+        //         'fieldType'  => 'radio',
+        //         'extensions' => 'json',
+        //     ],
+        //     'sql'       => "binary(16) NULL"
+        // ],
+        'activeAnimation'  => [
+            'inputType'  => 'checkbox',
             'sql' => [
-                'type' => 'boolean',
-                'default' => false,
+                'type'  => 'boolean',
+                'default'  => false,
             ],
+            'eval'  => array('tl_class' => 'w50 m12'),
         ],
         'responsiveWidth' => [
             'inputType' => 'checkbox',
@@ -166,6 +164,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
                 'type' => 'boolean',
                 'default' => false,
             ],
+            'eval'  => array('tl_class' => 'w50 m12'),
         ],
         'jsonInput'  => array(
             'inputType' => 'textarea',
@@ -173,7 +172,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'eval'      => array('mandatory' => false, 'tl_class' => 'w50'),
+            'eval'      => array('mandatory' => true, 'tl_class' => 'long clr m12'),
             'sql'       => "text NOT NULL default ''",
             'load_callback' => array(
                 array('tl_nhd_chartjs', 'jsonInputCallback')
@@ -185,7 +184,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'eval'      => array('mandatory' => false, 'tl_class' => 'w50'),
+            'eval'      => array('mandatory' => true, 'tl_class' => 'long clr m12'),
             'sql'       => "text NOT NULL default ''",
             'load_callback' => array(
                 array('tl_nhd_chartjs', 'jsonInputLabelsCallback')
@@ -197,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'eval'      => array('mandatory' => false, 'tl_class' => 'w50'),
+            'eval'      => array('mandatory' => true, 'tl_class' => 'long clr m12'),
             'sql'       => "text NOT NULL default ''",
             'load_callback' => array(
                 array('tl_nhd_chartjs', 'jsonInputOptionsCallback')
@@ -208,7 +207,6 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
 
 class tl_nhd_chartjs extends Backend
 {
-
     public function jsonInputOptionsCallback($varValue, DataContainer $dc)
     {
         if(!empty($varValue)) {
@@ -229,12 +227,12 @@ class tl_nhd_chartjs extends Backend
 
     public function jsonInputCallback($varValue, DataContainer $dc)
     {
-        if(!empty($varValue)) {
+        if($dc->activeRecord->chartType == $varValue) {
             return $varValue;
         } else {
             switch($dc->activeRecord->chartType) {
                 case 'bar':
-                    return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['var']);
+                    return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['bar']);
                     break;
                 case 'bubble':
                     return json_decode($GLOBALS['TL_LANG']['tl_nhd_chartjs']['fields']['jsonInput']['default']['bubble']);
