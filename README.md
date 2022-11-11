@@ -2,7 +2,7 @@
 
 # Contao ChartJS Diagramm
 
-The perfect solution to integrate Chart.js diagrams in Contao. With this solution a chart is already on your website in a few steps. Open source and free of charge!
+The perfect solution to integrate Chart.js charts in Contao. With this solution a chart is already on your website in a few steps. Open source and free of charge!
 
 ## Examples
 
