@@ -18,22 +18,16 @@ use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\CoreBundle\Routing\ScopeMatcher;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
-use Contao\Date;
-use Contao\FrontendUser;
 use Contao\ModuleModel;
-use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\Template;
 use Doctrine\DBAL\Connection;
 use Newhorizondesign\ContaoChartjsDiagramms\Model\NhdChartjsModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment as TwigEnvironment;
-
-
 
 #[AsFrontendModule(category: 'ChartJS')]
 class ListenChartjsModulesController extends AbstractFrontendModuleController

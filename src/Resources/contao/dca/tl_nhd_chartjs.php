@@ -227,7 +227,7 @@ class tl_nhd_chartjs extends Backend
 
     public function jsonInputCallback($varValue, DataContainer $dc)
     {
-        if($dc->activeRecord->chartType == $varValue) {
+        if(!empty($varValue)) {
             return $varValue;
         } else {
             switch($dc->activeRecord->chartType) {

@@ -25,20 +25,6 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder(self::ROOT_KEY);
 
-        $treeBuilder->getRootNode()
-            ->children()
-                ->arrayNode('foo')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('bar')
-                            ->cannotBeEmpty()
-                            ->defaultValue('***')
-                        ->end()
-                    ->end()
-                ->end() // end foo
-            ->end()
-        ;
-
         return $treeBuilder;
     }
 }
