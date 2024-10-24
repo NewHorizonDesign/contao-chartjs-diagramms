@@ -31,6 +31,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: Update the dependencies
+        run: composer update --no-install --no-interaction --no-suggest
+
       - name: Install the dependencies
         run: composer install --no-interaction --no-suggest
 
