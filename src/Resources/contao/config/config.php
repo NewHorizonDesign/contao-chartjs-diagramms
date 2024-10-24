@@ -12,7 +12,7 @@
 
 use Newhorizondesign\ContaoChartjsDiagramms\Model\NhdChartjsModel;
 
-/**
+/**w
  * Backend modules
  */
 $GLOBALS['BE_MOD']['chartjs']['chartjs_collection'] = array(
@@ -28,4 +28,5 @@ $GLOBALS['TL_MODELS']['tl_nhd_chartjs'] = NhdChartjsModel::class;
 /**
  * CSS / JAVASCRIPT
  */
+$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/newhorizondesigncontaochartjsdiagramms/js/chartjsfunctions.js|static|'.time();
 $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/newhorizondesigncontaochartjsdiagramms/js/chart.js|static|'.time();

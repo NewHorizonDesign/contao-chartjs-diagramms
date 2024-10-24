@@ -172,7 +172,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'eval'      => array('mandatory' => true, 'tl_class' => 'long clr m12'),
+            'eval'      => array('rte' => 'ace|js', 'mandatory' => true, 'tl_class' => 'long clr m12'),
             'sql'       => "text NOT NULL default ''",
             'load_callback' => array(
                 array('tl_nhd_chartjs', 'jsonInputCallback')
@@ -184,7 +184,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'eval'      => array('mandatory' => true, 'tl_class' => 'long clr m12'),
+            'eval'      => array('rte' => 'ace|js', 'mandatory' => true, 'tl_class' => 'long clr m12'),
             'sql'       => "text NOT NULL default ''",
             'load_callback' => array(
                 array('tl_nhd_chartjs', 'jsonInputLabelsCallback')
@@ -196,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_nhd_chartjs'] = array(
             'search'    => true,
             'filter'    => true,
             'sorting'   => true,
-            'eval'      => array('mandatory' => true, 'tl_class' => 'long clr m12'),
+            'eval'      => array('rte' => 'ace|js', 'mandatory' => true, 'tl_class' => 'long clr m12'),
             'sql'       => "text NOT NULL default ''",
             'load_callback' => array(
                 array('tl_nhd_chartjs', 'jsonInputOptionsCallback')
